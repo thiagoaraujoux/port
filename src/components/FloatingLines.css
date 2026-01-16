@@ -1,0 +1,19 @@
+.floating-lines-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1; /* Fica no fundo */
+  pointer-events: auto; /* Permite interatividade com os shaders */
+  overflow: hidden;
+}
+
+.orb-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2; /* Fica entre as linhas e o texto */
+  pointer-events: none;
+}
