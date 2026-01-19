@@ -1,12 +1,12 @@
-import LiquidScreen from './components/LiquidScreen'
-import './App.css'
+import Portfolio from "./pages/Portfolio"; // Caminho corrigido
+import "./App.css";
 
 function App() {
   return (
     <div className="App">
-      <LiquidScreen />
+      <Portfolio />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
