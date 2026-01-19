@@ -28,16 +28,13 @@ body {
   height: 100vh;
   overflow: hidden;
 }
-
-.ls-background-fixed {
+canvas {
+  display: block;
   position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-}
-
-.ls-background-fixed canvas {
-  pointer-events: auto !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 /* --- 3. NAVBAR E MENU HAMBÚRGUER --- */
