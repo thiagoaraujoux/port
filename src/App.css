@@ -1,16 +1,39 @@
-#root {
-  width: 100%;
-  height: 100vh;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  padding: 0;
-  overflow: hidden; /* Impede scroll acidental pela animação */
-  background-color: #050505;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  color: #fff;
+  overflow-x: hidden;
+  background: #0a0e17;
+  min-height: 100vh;
 }
 
-.App {
+.cosmic-container {
+  position: relative;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  isolation: isolate; /* Isolar contexto de empilhamento */
+}
+
+/* Garantir que o conteúdo fique acima das partículas */
+.header, .main-content, .footer {
+  position: relative;
+  z-index: 10;
+}
+
+/* Melhorar contraste para texto */
+.title, .subtitle, .demo-content h3, .demo-content p, .nav-links a {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.demo-content {
+  backdrop-filter: blur(15px); /* Aumentar blur para melhor legibilidade */
 }

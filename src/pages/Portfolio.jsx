@@ -1,41 +1,40 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Antigravity from '../components/Antigravity/Antigravity';
 import CardSwap, { Card } from '../components/CardSwap/CardSwap';
+import PurpleParticles from '../components/Aurora/Aurora';
 import './Portfolio.css';
 
 const Portfolio = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState(0);
   const scrollContainerRef = useRef(null);
 
-  // Lógica de Scroll para detetar secção ativa e efeitos de fundo
-  useEffect(() => {
-    const handleScroll = (e) => {
-      const { scrollTop, clientHeight } = e.target;
-      const section = Math.round(scrollTop / clientHeight);
-      setActiveSection(section);
-    };
-    const scroller = scrollContainerRef.current;
-    if (scroller) scroller.addEventListener('scroll', handleScroll);
-    return () => scroller?.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Fecha o menu ao clicar num link
   const closeMenu = () => setIsMenuOpen(false);
 
   return (
     <div className="ls-wrapper">
-      {/* BACKGROUND - Antigravity reativo ao mouse */}
+      {/* BACKGROUND COM PARTICULAS RÁPIDAS */}
       <div className="ls-background-fixed">
-        <Antigravity 
-          count={500} 
-          color="#5227FF" 
-          magnetRadius={15} 
-          opacity={activeSection === 0 ? 1 : 0.15} 
+        {/* PARTICULAS ROXAS RÁPIDAS E INTENSAS */}
+        <PurpleParticles
+          // REMOVIDO: scrollProgress prop
+          particleCount={550} // Aumentado
+          particleSpread={20}
+          speed={0.3} // MUITO mais rápido
+          particleBaseSize={140} // Aumentado
+          sizeRandomness={3.5} // Aumentado
+          moveParticlesOnHover={true}
+          particleHoverFactor={0.8} // Aumentado
+          alphaParticles={true}
+          disableRotation={false}
+          pixelRatio={1.5}
+          intensity={1.8} // Muito mais intenso
+          className="purple-particles-fullscreen"
         />
+        
+        {/* Overlay para melhor legibilidade */}
+        <div className="content-overlay" />
       </div>
 
-      {/* NAVBAR GLASS COM HAMBÚRGUER */}
+      {/* NAVBAR */}
       <nav className="ls-navbar">
         <div className="ls-nav-content">
           <div className="ls-logo">THIAGO ARAÚJO</div>
@@ -51,7 +50,7 @@ const Portfolio = () => {
         </div>
       </nav>
 
-      {/* MENU MOBILE OVERLAY */}
+      {/* MENU MOBILE */}
       <div className={`ls-mobile-menu ${isMenuOpen ? 'active' : ''}`}>
         <div className="ls-menu-links">
           <a href="#home" onClick={closeMenu}>INÍCIO</a>
@@ -60,10 +59,9 @@ const Portfolio = () => {
         </div>
       </div>
 
-      {/* MAIN CONTENT SCROLL */}
+      {/* MAIN CONTENT */}
       <div className="ls-main-scroll" ref={scrollContainerRef}>
-        
-        {/* SEÇÃO 1: HERO */}
+        {/* Seção Hero */}
         <section id="home" className="ls-section">
           <div className="ls-hero-container">
             <div className="ls-hero-text">
@@ -82,19 +80,23 @@ const Portfolio = () => {
             <div className="ls-hero-cards">
               <CardSwap cardDistance={window.innerWidth < 968 ? 30 : 40}>
                 <Card>
-                  <h3 className="card-title">Fullstack Dev</h3>
-                  <p className="card-text">Java, React, Next.js e PHP. Dashboards em Power BI e Looker Studio.</p>
+                  <div className="ls-card-glass">
+                    <h3 className="card-title">Fullstack Dev</h3>
+                    <p className="card-text">Java, React, Next.js e PHP. Dashboards em Power BI e Looker Studio.</p>
+                  </div>
                 </Card>
                 <Card>
-                  <h3 className="card-title">Infra & Redes</h3>
-                  <p className="card-text">Docker, VMware, Linux (Ubuntu/Debian) e Mikrotik.</p>
+                  <div className="ls-card-glass">
+                    <h3 className="card-title">Infra & Redes</h3>
+                    <p className="card-text">Docker, VMware, Linux (Ubuntu/Debian) e Mikrotik.</p>
+                  </div>
                 </Card>
               </CardSwap>
             </div>
           </div>
         </section>
 
-        {/* SEÇÃO 2: EXPERIÊNCIA (TIMELINE) */}
+        {/* SEÇÃO 2: EXPERIÊNCIA */}
         <section id="exp" className="ls-section">
           <div className="ls-content-glass">
             <h2 className="section-title">Trajetória Profissional</h2>
@@ -135,7 +137,6 @@ const Portfolio = () => {
             </div>
           </div>
         </section>
-
       </div>
     </div>
   );
